@@ -38,15 +38,15 @@ steps:
   inputs:
    targetType: 'inline'
    script: |
-    Invoke-WebRequest -Uri 'https://cdn.shift left.io/download/s1-latest-windows-x64.zip -OutFile $(Agent. HomeDirectory)\sl.zip.
-    Expand-Archive Path $(Agent.HomeDirectory)\sl.zip -DestinationPath $(Agent.HomeDirectory)\
+    Invoke-WebRequest -Uri 'https://cdn.shiftleft.io/download/s1-latest-windows-x64.zip -OutFile$(Agent.HomeDirectory)\sl.zip.
+    Expand-ArchivePath $(Agent.HomeDirectory)\sl.zip -DestinationPath $(Agent.HomeDirectory)\
 
  
 - task: CmdLine@2
   displayName: Analyze with Shiftleft
   inputs:
    script: |
-    $(Agent.HomeDirectory)\sl.exe analyze --wait --app ShiftLeftDotnetCoreDemo -tag branch-$(Build. SourceBranchName) --tag app.group="AppSecTestApps" --csharp "netcoreWebapi/netcoreWebapi.sln"
+    $(Agent.HomeDirectory)\sl.exe analyze --wait --app ShiftLeftDotnetCoreDemo -tag branch-$(Build.SourceBranchName) --tag app.group="AppSecTestApps" --csharp "netcoreWebapi/netcoreWebapi.sln"
     workingDirectory:'$(Build.SourcesDirectory)'
   env:
     SHIFTLEFT_ACCESS_TOKEN: $(SHIFTLEFT_ACCESS_TOKEN)
